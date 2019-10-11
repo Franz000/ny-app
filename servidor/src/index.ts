@@ -5,6 +5,7 @@ import cors from 'cors';
 import indexRutas from './rutas/indexRutas';
 import sensorRutas from './rutas/sensorRutas';
 import cuentaRutas from './rutas/cuentaRutas';
+import loginRutas from './rutas/LoginRutas';
 
 class Server {
     public app: Application;
@@ -26,6 +27,7 @@ class Server {
         this.app.use('/',indexRutas);
         this.app.use('/api/sensor',sensorRutas);
         this.app.use('/api/cuenta',cuentaRutas);
+        this.app.use('/api/users',loginRutas);
     }
 
     start(): void {

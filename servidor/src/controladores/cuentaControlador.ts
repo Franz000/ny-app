@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { encode, decode } from 'jwt-simple';
 import db from '../database'
 
 class CuentaControlador {
@@ -20,6 +21,7 @@ class CuentaControlador {
         }
     }
 
+
     public async crear(req: Request, res: Response): Promise<any> {
         const { usuario, password } = req.body;
         if (Boolean(usuario) && Boolean(password)) {
@@ -28,6 +30,10 @@ class CuentaControlador {
             if (existe.length > 0) {
                 res.status(404).json({ mensaje: "La Cuenta Ya Esta Registrada." });
             } else {
+                const key = "palabra clave";
+                const token = encode({usuario: usuario},key,'HS256');
+                req.body.token = token;//.split(".")[1];
+                // var decoded = decode(token, key);
                 await db.query('INSERT INTO cuentas set ?', [req.body]);
                 res.json({ mensaje: "Cuenta Registrada" });
             }

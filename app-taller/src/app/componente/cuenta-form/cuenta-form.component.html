@@ -1,0 +1,32 @@
+<div class="col-md-4 offset-md-4 mt-4">
+    <div class="card">
+        <div class="card-body">
+            <form>
+                <div class="form-group has-success">
+                    <!-- <label class="form-control-label" for="usuario">Usuario:</label> -->
+                    <input type="text" value="correct value" id="usuario" name="usuario" [(ngModel)]="cuenta.usuario" placeholder="Usuario" class="form-control is-valid" autofocus>
+                    <div class="valid-feedback">Correcto!</div>
+                </div>
+                <div class="form-group has-success">
+                    <input type="password" name="password" [(ngModel)]="cuenta.password" placeholder="Password" class="form-control">                    
+                </div>
+                <div class="form-group has-success">
+                    <input type="password" name="passwordR" [(ngModel)]="passwordR" placeholder="Repita el Password" class="form-control">                    
+                </div>
+                <button class="btn btn-success btn-block" (click)="editar== true? actualizarCuenta() : registrarCuenta()">
+                    Registrar
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="col-md-4">
+    <div class="card card-body text-center">
+        <h3>{{cuenta.usuario}}</h3>
+        <p>{{cuenta.password}}</p>
+        <p>{{passwordR}}</p>
+        <p>{{cuenta.fecha | date: 'HH:mm:ss yyy-MM-dd'}}</p>
+    </div>
+</div> -->

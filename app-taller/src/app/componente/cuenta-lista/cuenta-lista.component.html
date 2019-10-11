@@ -1,0 +1,17 @@
+<div class="col-md-4" *ngFor="let cuenta of cuentas">
+    <div class="card text-center">
+        <div class="card-header border-primary bg-info text-white d-flex justify-content-between align-items-center">
+            {{cuenta.usuario}}
+            <button class="btn btn-danger" (click)="deleteCuenta(cuenta.id)">
+                <i class=" far fa-trash-alt"></i>
+            </button>
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">{{cuenta.password}}</h4>
+            <p class="card-text"></p>
+            <a [routerLink]="['/cuenta/edit',cuenta.id]" class="btn btn-warning btn-block" >
+                Editar
+            </a>
+        </div>
+    </div>
+</div>

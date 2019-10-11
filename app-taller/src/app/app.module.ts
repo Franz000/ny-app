@@ -1,24 +1,38 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http'
+import { FormsModule } from '@angular/forms'
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavegadorComponent } from './componenete/navegador/navegador.component';
-import { CuentaFormComponent } from './componenete/cuenta-form/cuenta-form.component';
-import { CuentaListaComponent } from './componenete/cuenta-lista/cuenta-lista.component';
+import { NavegadorComponent } from './componente/navegador/navegador.component';
+import { CuentaFormComponent } from './componente/cuenta-form/cuenta-form.component';
+import { CuentaListaComponent } from './componente/cuenta-lista/cuenta-lista.component';
+import { LoginComponent } from './componente/login/login.component';
+
+import { CuentasService } from './Servicios/cuentas.service'
+import { from } from 'rxjs';
+import { PanelComponent } from './componente/panel/panel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavegadorComponent,
     CuentaFormComponent,
-    CuentaListaComponent
+    CuentaListaComponent,
+    LoginComponent,
+    PanelComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    CuentasService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
