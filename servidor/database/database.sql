@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS s_hospital;
+
+USE s_hospital;
+
+
+CREATE TABLE cuentas(
+    id INT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    usuario VARCHAR(120) CHARACTER SET utf8 COLLATE utf8_general_ci UNIQUE,
+    password VARCHAR(120) CHARACTER SET utf8 COLLATE utf8_general_ci,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
