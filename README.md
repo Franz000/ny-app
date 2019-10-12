@@ -1,27 +1,38 @@
-# MyApp
+# INSTRUCCIONES
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.8.
+INSTALAR NODEJS
 
-## Development server
+## DESCARGAR REPOSITORIO
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+CLONAR EL REPOSITORIO CON:
 
-## Code scaffolding
+`git clone https://github.com/leo45v/tallerX.git`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## INGRESAR A LA CARPETA DEL SERVIDOR
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+ABRIR UN COMANDLINE Y EJECUTAR DENTRO LA CARPETA:
 
-## Running unit tests
+`npm install`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## INGRESAR A LA CARPETA DE APP-TALLER
 
-## Running end-to-end tests
+ABRIR UN COMANDLINE Y EJECUTAR DENTRO LA CARPETA:
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+`npm install`
 
-## Further help
+## LEVANTAR PRIMERO EL SERVIDOR
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+INGRESAR DENTRO LA CARPETA SERVIDOR Y EJECUTAR EN UN COMANDLINE:
+
+`npm run build`
+
+ABRIR OTRO CMD Y EJECUTAR:
+
+`npm run dev`
+
+## CORRER EL CLIENTE
+
+INGRESAR DENTRO LA CARPETA APP-TALLER Y ABRIR UN CMD Y EJECUTAR:
+
+`ng serve`
