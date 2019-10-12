@@ -3,6 +3,7 @@ import { Cuenta } from '../../models/Cuentas';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { CuentasService } from '../../Servicios/cuentas.service';
+import { AutenticarService } from 'src/app/Servicios/autenticar.service';
 
 @Component({
   selector: 'app-cuenta-form',
@@ -24,10 +25,12 @@ export class CuentaFormComponent implements OnInit {
 
   passwordR: string = '';
 
-  constructor(private cuentasService: CuentasService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private cuentasService: CuentasService, private router: Router, private activatedRoute: ActivatedRoute, private autenticarService: AutenticarService) { }
 
   ngOnInit() {
     const params = this.activatedRoute.snapshot.params;
+
+    
     if (params.id) {
       this.cuentasService.getCuenta(params.id)
         .subscribe(
@@ -39,9 +42,13 @@ export class CuentaFormComponent implements OnInit {
           },
           err => {
             console.log(err);
-            this.router.navigate(['/index']);
+            this.router.navigate(['/']);
           }
         );
+    }else{
+      if (this.autenticarService.currentUserValue) {
+        this.router.navigate(['/']);
+      }
     }
   }
 

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AutenticarService } from 'src/app/Servicios/autenticar.service';
+import { Login } from 'src/app/models/login';
 
 @Component({
   selector: 'app-navegador',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavegadorComponent implements OnInit {
 
-  constructor() { }
+  currentUser: Login;
+  
+  constructor(private router: Router, private autenticarService: AutenticarService) { 
+    this.autenticarService.currentUser.subscribe(x => this.currentUser = x);
+  }
 
   ngOnInit() {
   }
+
+  logout() {
+    this.autenticarService.logout();
+    this.router.navigate(['/login']);
+}
 
 }

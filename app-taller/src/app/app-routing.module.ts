@@ -12,29 +12,35 @@ import { AutenticarGuard } from './seguridad/autenticar.guard';
 const routes: Routes = [
   {
     path: '',
-    component: LoginComponent
+    component: PanelComponent,
+    canActivate: [AutenticarGuard]
     //redirectTo: '/index',
     //pathMatch: 'full'
   },{
-    path: 'dashboard',
+    path: 'home',
     component: PanelComponent,
     canActivate: [AutenticarGuard]
+    
   },{
     path: 'login',
     component: LoginComponent
   },{
     path: 'index',
-    component: LoginComponent
+    component: PanelComponent,
+    canActivate: [AutenticarGuard]
   },{
     path: 'cuentas',
-    component: CuentaListaComponent
+    component: CuentaListaComponent,
+    canActivate: [AutenticarGuard]
   },{
     path: 'cuenta/registrar',
     component: CuentaFormComponent
   },{
     path: 'cuenta/edit/:id',
-    component: CuentaFormComponent
-  }
+    component: CuentaFormComponent,
+    canActivate: [AutenticarGuard]
+  },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

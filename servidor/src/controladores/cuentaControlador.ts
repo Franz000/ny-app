@@ -30,7 +30,7 @@ class CuentaControlador {
             if (existe.length > 0) {
                 res.status(404).json({ mensaje: "La Cuenta Ya Esta Registrada." });
             } else {
-                const key = "palabra clave";
+                const key = "Andreita Arce";
                 const token = encode({usuario: usuario},key,'HS256');
                 req.body.token = token;//.split(".")[1];
                 // var decoded = decode(token, key);

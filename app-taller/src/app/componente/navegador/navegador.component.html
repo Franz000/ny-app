@@ -4,22 +4,28 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand" routerLink="/" routerLinkActive="active"><i class="fas fa-hospital-symbol"></i> Hospital</a>
+      
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
           <li class="nav-item">
             <a class="nav-link" routerLink="/cuentas" routerLinkActive="active"><i class="fas fa-users"></i> Cuentas</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="! currentUser">
             <a class="nav-link" routerLink="/cuenta/registrar" routerLinkActive="active"><i class="fas fa-user-plus"></i> Crear Cuenta</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="! currentUser">
             <a class="nav-link" routerLink="/login" routerLinkActive="active" tabindex="-1" aria-disabled="true"><i class="fas fa-sign-in-alt"></i> Log in </a>
           </li>
+          <!-- <li class="nav-item" >
+             
+          </li> -->
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        
+        <form class="form-inline my-2 my-lg-0 ml-5 mr-0" *ngIf="currentUser">
+            <input class="form-control mr-sm-2"  type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
+        <a class="nav-link" (click)="logout()" href="#" routerLinkActive="active" *ngIf="currentUser" aria-disabled="true"><i class="fas fa-sign-out-alt"></i> Logout </a>
       </div>
     <!-- </div> -->
   </nav>

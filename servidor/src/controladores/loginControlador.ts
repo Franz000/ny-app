@@ -7,15 +7,20 @@ class LoginControlador {
         const { usuario , password } = req.body;
         if (Boolean(usuario) && Boolean(password)) {
             console.log(req.body);
-            const existe = await db.query('SELECT token FROM cuentas WHERE usuario = ? AND password = ?', [usuario, password]);
+            const existe = await db.query('SELECT usuario, password, token FROM cuentas WHERE usuario = ? AND password = ?', [usuario, password]);
             console.log(existe.length);
             if (existe.length > 0) {
                 res.json(existe[0]);
             } else {
-                res.status(404).json({ mensaje: "La Cuenta No esta Registrada." });
+                res.json({error: { mensaje: "La Cuenta No esta Registrada." } });
+                // res.json({mensaje: "La Cuenta No esta Registrada."});
+                // res.status(401).json({ mensaje: "La Cuenta No esta Registrada." });
             }
         } else {
-            res.status(404).json({ mensaje: 'Se espera: "USUARIO" y "PASSWORD"' });
+            res.json({error: { mensaje: "La Cuenta No esta Registrada." } });
+
+            // res.status(401).json({ mensaje: 'Se espera: "USUARIO" y "PASSWORD"' });
+            // res.json({mensaje: "La Cuenta No esta Registrada."});
         }
     }
     public options(req: Request, res: Response){
