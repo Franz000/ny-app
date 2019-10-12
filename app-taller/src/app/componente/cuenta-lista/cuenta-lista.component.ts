@@ -1,6 +1,8 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 
 import { CuentasService } from '../../Servicios/cuentas.service';
+import { Login } from 'src/app/models/login';
+import { AutenticarService } from 'src/app/Servicios/autenticar.service';
 // import { Cuenta } from '../../models/Cuentas'
 
 @Component({
@@ -12,8 +14,12 @@ export class CuentaListaComponent implements OnInit {
   
   @HostBinding('class') classes = 'row';
 
+  currentUser: Login;
+  
   cuentas: any = [];
-  constructor(private cuentasService: CuentasService) { }
+  constructor(private cuentasService: CuentasService, private autenticarService: AutenticarService) {
+    this.autenticarService.currentUser.subscribe(x => this.currentUser = x);
+   }
 
   ngOnInit() {
     this.getCuentas();

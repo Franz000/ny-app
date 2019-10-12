@@ -7,7 +7,7 @@ class LoginControlador {
         const { usuario , password } = req.body;
         if (Boolean(usuario) && Boolean(password)) {
             console.log(req.body);
-            const existe = await db.query('SELECT usuario, password, token FROM cuentas WHERE usuario = ? AND password = ?', [usuario, password]);
+            const existe = await db.query('SELECT * FROM cuentas WHERE usuario = ? AND password = ?', [usuario, password]);
             console.log(existe.length);
             if (existe.length > 0) {
                 res.json(existe[0]);

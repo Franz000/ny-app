@@ -7,10 +7,10 @@
       
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="currentUser && currentUser.tipo==3">
             <a class="nav-link" routerLink="/cuentas" routerLinkActive="active"><i class="fas fa-users"></i> Cuentas</a>
           </li>
-          <li class="nav-item" *ngIf="! currentUser">
+          <li class="nav-item" *ngIf="! currentUser || currentUser.tipo==3">
             <a class="nav-link" routerLink="/cuenta/registrar" routerLinkActive="active"><i class="fas fa-user-plus"></i> Crear Cuenta</a>
           </li>
           <li class="nav-item" *ngIf="! currentUser">
@@ -25,7 +25,7 @@
             <input class="form-control mr-sm-2"  type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
-        <a class="nav-link" (click)="logout()" href="#" routerLinkActive="active" *ngIf="currentUser" aria-disabled="true"><i class="fas fa-sign-out-alt"></i> Logout </a>
+        <a class="nav-link" (click)="logout()" routerLink="#" routerLinkActive="active" *ngIf="currentUser" aria-disabled="true"><i class="fas fa-sign-out-alt"></i> Logout </a>
       </div>
     <!-- </div> -->
   </nav>
