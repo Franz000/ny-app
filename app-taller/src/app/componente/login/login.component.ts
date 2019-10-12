@@ -28,7 +28,10 @@ export class LoginComponent implements OnInit {
     usuario: '',
     password: '',
     token: '',
-    tipo:''
+    tipo:'',
+    apellidos: '',
+    carnet: '',
+    nombre: ''
   }
 
   constructor(private fb: FormBuilder, private autenticarService: AutenticarService, private router: Router, private route: ActivatedRoute, private alertService: AlertaService) {

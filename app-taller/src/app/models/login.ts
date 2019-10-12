@@ -1,7 +1,10 @@
 export interface Login {
-    id: string;
+    id: string|number;
     usuario: string;
     password: string;
     token: string;
-    tipo: string;
+    tipo: string|number;
+    nombre: string;
+    apellidos: string;
+    carnet: string;
 }

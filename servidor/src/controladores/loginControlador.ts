@@ -7,7 +7,7 @@ class LoginControlador {
         const { usuario , password } = req.body;
         if (Boolean(usuario) && Boolean(password)) {
             console.log(req.body);
-            const existe = await db.query('SELECT * FROM cuentas WHERE usuario = ? AND password = ?', [usuario, password]);
+            const existe = await db.query('SELECT * FROM persona p INNER JOIN cuentas c ON c.id = p.id WHERE c.usuario=? AND c.password=?', [usuario, password]);
             console.log(existe.length);
             if (existe.length > 0) {
                 res.json(existe[0]);

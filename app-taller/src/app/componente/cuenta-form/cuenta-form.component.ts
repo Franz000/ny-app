@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { CuentasService } from '../../Servicios/cuentas.service';
 import { AutenticarService } from 'src/app/Servicios/autenticar.service';
+import { AlertaService } from 'src/app/Servicios/alerta.service';
 
 @Component({
   selector: 'app-cuenta-form',
@@ -15,22 +16,23 @@ export class CuentaFormComponent implements OnInit {
   @HostBinding('class') classes = 'row';
 
   editar: boolean = false;
-
   cuenta: Cuenta = {
     id: 0,
     usuario: '',
     password: '',
-    fecha: new Date()
+    fecha: new Date(),
+    apellidos: '',
+    carnet: '',
+    nombre: '',
   };
 
   passwordR: string = '';
 
-  constructor(private cuentasService: CuentasService, private router: Router, private activatedRoute: ActivatedRoute, private autenticarService: AutenticarService) { }
+  constructor(private cuentasService: CuentasService, private router: Router, private activatedRoute: ActivatedRoute, private autenticarService: AutenticarService, private alertService: AlertaService) {
+  }
 
   ngOnInit() {
     const params = this.activatedRoute.snapshot.params;
-
-    
     if (params.id) {
       this.cuentasService.getCuenta(params.id)
         .subscribe(
@@ -45,8 +47,8 @@ export class CuentaFormComponent implements OnInit {
             this.router.navigate(['/']);
           }
         );
-    }else{
-      if (this.autenticarService.currentUserValue) {
+    } else {
+      if (this.autenticarService.currentUserValue && this.autenticarService.currentUserValue.tipo !== 3) {
         this.router.navigate(['/']);
       }
     }
@@ -56,19 +58,22 @@ export class CuentaFormComponent implements OnInit {
     delete this.cuenta.fecha;
     delete this.cuenta.id;
     if (this.passwordR == this.cuenta.password) {
+      console.log(this.cuenta);
       this.cuentasService.saveCuenta(this.cuenta).subscribe(
         res => {
           console.log(res);
-          this.router.navigate(['/index']);
+          this.router.navigate(['/cuentas']);
         },
         err => {
           console.log(err);
         }
       );
+    }else{
+      this.alertService.error("Datos Incorrectos");
     }
   }
 
-  actualizarCuenta(){
+  actualizarCuenta() {
     delete this.cuenta.fecha;
     if (this.passwordR == this.cuenta.password) {
       this.cuentasService.updateCuenta(this.cuenta.id, this.cuenta).subscribe(

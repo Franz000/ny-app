@@ -13,9 +13,10 @@ import { LoginComponent } from './componente/login/login.component';
 
 import { CuentasService } from './Servicios/cuentas.service'
 import { AutenticarService } from './Servicios/autenticar.service'
-import { from } from 'rxjs';
 import { PanelComponent } from './componente/panel/panel.component';
 import { AlertaComponent } from './componente/alerta/alerta.component';
+import { PacienteComponent } from './componente/paciente/paciente.component';
+import { PacienteListaComponent } from './componente/paciente-lista/paciente-lista.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,8 @@ import { AlertaComponent } from './componente/alerta/alerta.component';
     LoginComponent,
     PanelComponent,
     AlertaComponent,
+    PacienteComponent,
+    PacienteListaComponent,
   ],
   imports: [
     BrowserModule,

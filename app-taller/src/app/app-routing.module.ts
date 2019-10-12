@@ -7,6 +7,7 @@ import { CuentaFormComponent } from './componente/cuenta-form/cuenta-form.compon
 import { PanelComponent } from './componente/panel/panel.component'
 
 import { AutenticarGuard } from './seguridad/autenticar.guard';
+import { PacienteComponent } from './componente/paciente/paciente.component';
 
 
 const routes: Routes = [
@@ -39,6 +40,10 @@ const routes: Routes = [
     path: 'cuenta/edit/:id',
     component: CuentaFormComponent,
     canActivate: [AutenticarGuard]
+  },
+  {
+    path: 'paciente/registrar',
+    component: PacienteComponent
   },
   { path: '**', redirectTo: '' }
 ];

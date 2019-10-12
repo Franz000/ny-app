@@ -2,9 +2,23 @@
     <div class="card">
         <div class="card-body">
             <form>
+                <h1 class="h3 mb-3 font-weight-normal">Registro de Médico</h1>
+                <div class="form-group has-success">
+                    <input type="text" name="nombre" [(ngModel)]="cuenta.nombre" placeholder="Nombre" class="form-control" autofocus> <!-- class: is-invalid -->
+                    <div class="valid-feedback">Correcto!</div> <!-- class: is-valid -->
+                </div>
+                <div class="form-group has-success">
+                    <input type="text" name="apellidos" [(ngModel)]="cuenta.apellidos" placeholder="Apellidos" class="form-control">
+                    <div class="valid-feedback">Correcto!</div>
+                </div>
+                <div class="form-group has-success">
+                    <input type="text" name="carnet" [(ngModel)]="cuenta.carnet" placeholder="Carnet de Identidad" class="form-control">
+                    <div class="valid-feedback">Correcto!</div>
+                </div>
+                <h3>Cuenta:</h3>
                 <div class="form-group has-success">
                     <!-- <label class="form-control-label" for="usuario">Usuario:</label> -->
-                    <input type="text" value="correct value" id="usuario" name="usuario" [(ngModel)]="cuenta.usuario" placeholder="Usuario" class="form-control is-valid" autofocus>
+                    <input type="text"  id="usuario" name="usuario" [(ngModel)]="cuenta.usuario" placeholder="Usuario" class="form-control">
                     <div class="valid-feedback">Correcto!</div>
                 </div>
                 <div class="form-group has-success">
@@ -20,13 +34,3 @@
         </div>
     </div>
 </div>
-
-
-<!-- <div class="col-md-4">
-    <div class="card card-body text-center">
-        <h3>{{cuenta.usuario}}</h3>
-        <p>{{cuenta.password}}</p>
-        <p>{{passwordR}}</p>
-        <p>{{cuenta.fecha | date: 'HH:mm:ss yyy-MM-dd'}}</p>
-    </div>
-</div> -->
