@@ -17,6 +17,7 @@ import { PanelComponent } from './componente/panel/panel.component';
 import { AlertaComponent } from './componente/alerta/alerta.component';
 import { PacienteComponent } from './componente/paciente/paciente.component';
 import { PacienteListaComponent } from './componente/paciente-lista/paciente-lista.component';
+import { PruebaComponent } from './component/prueba/prueba.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { PacienteListaComponent } from './componente/paciente-lista/paciente-lis
     AlertaComponent,
     PacienteComponent,
     PacienteListaComponent,
+    PruebaComponent,
   ],
   imports: [
     BrowserModule,

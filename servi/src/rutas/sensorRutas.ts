@@ -9,9 +9,7 @@ class SensorRutas {
     }
 
     config(): void {
-        this.ruta.post('/esp32server/data', sesnorControlador.guardarData );
-        this.ruta.post('/esp32server/add', sesnorControlador.agregarDisposirivo );
-        this.ruta.post('/esp32server/obtener/paciente', sesnorControlador.obtenerPaciente );
+        this.ruta.get('/', sesnorControlador.listar );
         this.ruta.get('/:id', sesnorControlador.obtener );
         this.ruta.post('/', sesnorControlador.crear );
         this.ruta.delete('/:id', sesnorControlador.borrar );

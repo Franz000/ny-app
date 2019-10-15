@@ -15,7 +15,7 @@ export class AutenticarService {
   private currentUserSubject: BehaviorSubject<Login>;
   public currentUser: Observable<Login>;
 
-  API_URI = 'http://localhost:3500/api';
+  API_URI = `http://${window.location.hostname}:3500/api`;
 
 
   constructor(private http: HttpClient) {
