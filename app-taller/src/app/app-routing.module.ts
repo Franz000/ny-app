@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { LoginComponent } from './componente/login/login.component'
@@ -8,6 +8,7 @@ import { PanelComponent } from './componente/panel/panel.component'
 
 import { AutenticarGuard } from './seguridad/autenticar.guard';
 import { PacienteComponent } from './componente/paciente/paciente.component';
+import { PacienteFormComponent } from './componente/paciente-form/paciente-form.component';
 
 
 const routes: Routes = [
@@ -43,7 +44,12 @@ const routes: Routes = [
   },
   {
     path: 'paciente/registrar',
-    component: PacienteComponent
+    component: PacienteFormComponent
+  },
+  {
+    path : 'editar/:current',
+    component: CuentaFormComponent,
+    canActivate: [AutenticarGuard]
   },
   { path: '**', redirectTo: '' }
 ];

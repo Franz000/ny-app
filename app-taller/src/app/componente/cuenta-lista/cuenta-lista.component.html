@@ -1,20 +1,26 @@
 <div class="col-md-4" *ngFor="let cuenta of cuentas">
-    <div class="card text-center">
-        <div class="card-header border-primary bg-dark text-white d-flex justify-content-between align-items-center" style="height: 64px;">
-            <p class="m-auto h4"><i class="fas fa-users" *ngIf="currentUser && currentUser.tipo==3 && cuenta.id==currentUser.id"> </i> <i class="fas fa-user" *ngIf="currentUser && currentUser.tipo==3 && cuenta.id!=currentUser.id"> </i> Dr. {{cuenta.apellidos}} {{cuenta.nombre}}</p>
-            <button class="btn btn-danger rounded" (click)="deleteCuenta(cuenta.id)"  *ngIf="currentUser && currentUser.tipo==3 && cuenta.id!=currentUser.id">
-                <i class=" far fa-trash-alt"></i>
-            </button>
-            
-        </div>`
-        
-        <div class="card-body">
-            <h4 class="card-title">{{cuenta.usuario}}</h4>
-            <p class="card-text">{{cuenta.password}}</p>
-            <p class="card-text">{{cuenta.carnet}}</p>
-            <a [routerLink]="['/cuenta/edit',cuenta.id]" class="btn btn-success btn-block rounded" >
-                Editar
-            </a>
+    <div class="container p-4">
+        <div class="card text-center">
+            <div class="card-header border-primary bg-dark text-white d-flex justify-content-between align-items-center"
+                style="height: 64px;">
+                <p class="m-auto h4"><i class="fas fa-users"
+                        *ngIf="currentUser && currentUser.tipo==3 && cuenta.id==currentUser.id"> </i> <i
+                        class="fas fa-user" *ngIf="currentUser && currentUser.tipo==3 && cuenta.id!=currentUser.id">
+                    </i> Dr. {{cuenta.apellidos}} {{cuenta.nombre}}</p>
+                <button class="btn btn-danger rounded" (click)="deleteCuenta(cuenta.id)"
+                    *ngIf="currentUser && currentUser.tipo==3 && cuenta.id!=currentUser.id">
+                    <i class=" far fa-trash-alt"></i>
+                </button>
+            </div>
+
+            <div class="card-body">
+                <h4 class="card-title">{{cuenta.usuario}}</h4>
+                <p class="card-text">{{cuenta.password}}</p>
+                <p class="card-text">{{cuenta.carnet}}</p>
+                <a [routerLink]="['/cuenta/edit',cuenta.id]" class="btn btn-success btn-block rounded">
+                    Editar
+                </a>
+            </div>
         </div>
     </div>
 </div>

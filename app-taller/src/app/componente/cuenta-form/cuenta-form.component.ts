@@ -33,24 +33,29 @@ export class CuentaFormComponent implements OnInit {
 
   ngOnInit() {
     const params = this.activatedRoute.snapshot.params;
-    if (params.id) {
-      this.cuentasService.getCuenta(params.id)
+    // console.log((Object.keys(params).length? "hay algo":"vacio"),params)
+    if (((params.id && this.autenticarService.currentUserValue.tipo === 3) || params.current==="current") && this.autenticarService.currentUserValue) {
+      this.cuentasService.getCuenta((params.id || this.autenticarService.currentUserValue.id))
         .subscribe(
           res => {
-            console.log(res);
+            // console.log(res);
             this.cuenta = res;
             this.passwordR = this.cuenta.password;
             this.editar = true;
           },
           err => {
-            console.log(err);
+            // console.log(err);
             this.router.navigate(['/']);
           }
         );
     } else {
-      if (this.autenticarService.currentUserValue && this.autenticarService.currentUserValue.tipo !== 3) {
+      if((Object.keys(params).length && this.autenticarService.currentUserValue.tipo === 3 )){
         this.router.navigate(['/']);
       }
+      else if (this.autenticarService.currentUserValue &&this.autenticarService.currentUserValue.tipo !== 3 ) {
+        this.router.navigate(['/']);
+      }
+
     }
   }
 
@@ -58,17 +63,17 @@ export class CuentaFormComponent implements OnInit {
     delete this.cuenta.fecha;
     delete this.cuenta.id;
     if (this.passwordR == this.cuenta.password) {
-      console.log(this.cuenta);
+      // console.log(this.cuenta);
       this.cuentasService.saveCuenta(this.cuenta).subscribe(
         res => {
-          console.log(res);
+          // console.log(res);
           this.router.navigate(['/cuentas']);
         },
         err => {
-          console.log(err);
+          // console.log(err);
         }
       );
-    }else{
+    } else {
       this.alertService.error("Datos Incorrectos");
     }
   }
@@ -78,11 +83,11 @@ export class CuentaFormComponent implements OnInit {
     if (this.passwordR == this.cuenta.password) {
       this.cuentasService.updateCuenta(this.cuenta.id, this.cuenta).subscribe(
         res => {
-          console.log(res);
+          // console.log(res);
           this.router.navigate(['/index']);
         },
         err => {
-          console.log(err);
+          // console.log(err);
         }
       );
     }

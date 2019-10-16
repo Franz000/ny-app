@@ -1,10 +1,20 @@
-<h1>Bienvenido Dr.{{currentUser.apellidos}} {{currentUser.nombre}}</h1>
-<h3>All registered users:</h3>
-<ul>
-    <li *ngFor="let user of users">
-        {{user.username}} ({{user.firstName}} {{user.lastName}})
-        - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
-    </li>
-</ul>
+<div class="jumbotron">
+    <h1 class="display-4">Binvenidos al ...... </h1>
+    <p class="lead">Informacion del proyecto.</p>
+    <hr class="my-4">
+    <!-- <div class="container"> -->
+        <h1>Bienvenido Dr.{{currentUser.apellidos}} {{currentUser.nombre}}</h1>
+        <h3>All registered users:</h3>
+        <ul>
+            <li *ngFor="let user of users">
+                {{user.username}} ({{user.firstName}} {{user.lastName}})
+                - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
+            </li>
+        </ul>
+        
+        <app-paciente-lista></app-paciente-lista>
+    <!-- </div> -->
+</div>
 
-<app-paciente-lista></app-paciente-lista>
+
+

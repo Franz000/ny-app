@@ -5,6 +5,7 @@ class PacienteControlador {
 
     public async agregarPaciente(req: Request, res: Response) {
         const { nombre, apellidos, carnet, fechaNacimiento, sexo, idMedico } = req.body;
+        console.log(req.body);
         if (Boolean(nombre) && Boolean(apellidos) && Boolean(carnet) && Boolean(fechaNacimiento) && Boolean(sexo) && Boolean(idMedico)) {
             const verMedico = await db.query('SELECT * FROM cuentas WHERE id = ?', [idMedico]);
 
@@ -33,16 +34,16 @@ class PacienteControlador {
                         await db.query('INSERT INTO pacientemedico set ?',[pame]);
                         res.json({ mesanje: "Paciente registrado" });
                     } else {
-                        res.status(404).json({ error: "No se pudo registrar al paciente" })
+                        res.json({ error: "No se pudo registrar al paciente" })
                     }
                 } else {
-                    res.status(404).json({ error: "El paciente ya esta registrado, cambie el carnet" })
+                    res.json({ error: "El paciente ya esta registrado, cambie el carnet" })
                 }
             }else{
-            res.status(401).json({ error: "Credenciales de Medico Incorrectos" })
+                res.json({ error: "Credenciales de Medico Incorrectos" })
             }
         } else {
-            res.status(404).json({ error: "Faltan Datos." })
+            res.json({ error: "Faltan Datos." })
         }
     }
 
@@ -91,7 +92,11 @@ class PacienteControlador {
     public async obtenerPaciente(req: Request, res: Response) {
         const { id } = req.params;
         const paciente = await db.query('SELECT * FROM persona pe INNER JOIN paciente p ON p.id=pe.id WHERE p.id = ?',[id]);
-        res.json(paciente);
+        if(paciente.length>0){
+            res.json(paciente[0]);
+        }else{
+            res.status(404).json({error: "No se encontro el paciente"});
+        }
     }
 
     public index(req: Request, res: Response) {

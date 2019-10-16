@@ -3,6 +3,7 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { CuentasService } from '../../Servicios/cuentas.service';
 import { Login } from 'src/app/models/login';
 import { AutenticarService } from 'src/app/Servicios/autenticar.service';
+import { Router } from '@angular/router';
 // import { Cuenta } from '../../models/Cuentas'
 
 @Component({
@@ -12,13 +13,17 @@ import { AutenticarService } from 'src/app/Servicios/autenticar.service';
 })
 export class CuentaListaComponent implements OnInit {
   
-  @HostBinding('class') classes = 'row';
+  @HostBinding('class') classes = 'row mr-0 mt-4 p-5';
 
   currentUser: Login;
   
   cuentas: any = [];
-  constructor(private cuentasService: CuentasService, private autenticarService: AutenticarService) {
-    this.autenticarService.currentUser.subscribe(x => this.currentUser = x);
+  constructor(private cuentasService: CuentasService, private autenticarService: AutenticarService,private router: Router) {
+    if(this.autenticarService.currentUserValue.tipo === 3 && this.autenticarService.currentUserValue){
+      this.autenticarService.currentUser.subscribe(x => this.currentUser = x);
+    }else{
+      this.router.navigate(['/']);
+    }
    }
 
   ngOnInit() {

@@ -10,6 +10,7 @@ class PacienteRutas {
 
     config(): void {
         this.ruta.post('/agregar', pacienteControlador.agregarPaciente );
+        this.ruta.options('/agregar', pacienteControlador.agregarPaciente );
         this.ruta.delete('/:id', pacienteControlador.borrarPaciente );
         this.ruta.put('/:id', pacienteControlador.actualizarPaciente );
         this.ruta.get('/medico/:id', pacienteControlador.listaPaciente );

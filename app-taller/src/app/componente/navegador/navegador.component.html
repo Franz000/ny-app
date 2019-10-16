@@ -11,15 +11,19 @@
       <li class="nav-item" *ngIf="currentUser && currentUser.tipo==3">
         <a class="nav-link" routerLink="/cuentas" routerLinkActive="active"><i class="fas fa-users"></i> Cuentas</a>
       </li>
-      <li class="nav-item" *ngIf="! currentUser || currentUser.tipo==3">
+      <li class="nav-item" *ngIf="!currentUser || currentUser.tipo==3">
         <a class="nav-link" routerLink="/cuenta/registrar" routerLinkActive="active"><i class="fas fa-user-plus"></i>
           Crear Cuenta</a>
       </li>
-      <li class="nav-item" *ngIf="! currentUser || currentUser.tipo==3">
+      <li class="nav-item" *ngIf="currentUser ">
         <a class="nav-link" routerLink="/paciente/registrar" routerLinkActive="active"><i class="fas fa-user-plus"></i>
           Agregar Paciente</a>
       </li>
-      <li class="nav-item" *ngIf="! currentUser">
+      <li class="nav-item" *ngIf="currentUser ">
+        <a class="nav-link" routerLink="/editar/current" routerLinkActive="active"><i class="fas fa-user-plus"></i>
+          Editar Cuenta</a>
+      </li>
+      <li class="nav-item" *ngIf="!currentUser">
         <a class="nav-link" routerLink="/login" routerLinkActive="active" tabindex="-1" aria-disabled="true"><i
             class="fas fa-sign-in-alt"></i> Log in </a>
       </li>

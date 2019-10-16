@@ -29,7 +29,7 @@ export class AutenticarService {
   }
 
   loginuser(login: Login): Observable<any> {
-    return this.http.post<any>(`${this.API_URI}/users/login?include=user`, login).pipe(map(user => {
+    return this.http.post<any>(`${this.API_URI}/users/login`, login).pipe(map(user => {//?include=user
       if (user.error) {
         const mensaje = user.error.mensaje;
         return throwError({ error: mensaje });
@@ -43,7 +43,7 @@ export class AutenticarService {
 
 
   public get currentUserValue(): Login {
-    console.log(this.currentUserSubject.value)
+    // console.log(this.currentUserSubject.value)
     return this.currentUserSubject.value;
   }
 

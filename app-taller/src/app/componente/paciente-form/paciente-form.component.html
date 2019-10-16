@@ -1,0 +1,46 @@
+<div class="col-md-4 offset-md-4 mt-4">
+        <app-alerta></app-alerta>
+        <div class="card">
+            <div class="card-body">
+                <form [formGroup]="formPaciente" novalidate="" (ngSubmit)="editar== true? actualizarPaciente() : registrarPaciente()">
+                    <h1 class="h3 mb-3 font-weight-normal">Registro de Paciente</h1>
+                    <div class="form-group has-success">
+                        <input type="text" name="nombre" formControlName="nombre" placeholder="Nombre" [ngClass]="{'is-invalid': !formPaciente.get('nombre').valid && submitted.nombre, 'is-valid': formPaciente.get('nombre').valid && submitted.nombre}" class="form-control" autofocus> <!-- class: is-invalid -->
+                        <div class="valid-feedback">Correcto!</div> <!-- class: is-valid -->
+                    </div>
+                    <div class="form-group has-success">
+                        <input type="text" name="apellidos" formControlName="apellidos" placeholder="Apellidos" class="form-control" [ngClass]="{'is-invalid': !formPaciente.get('apellidos').valid && submitted.apellidos, 'is-valid': formPaciente.get('apellidos').valid && submitted.apellidos}">
+                        <div class="valid-feedback">Correcto!</div>
+                    </div>
+                    <div class="form-group has-success">
+                        <input type="text" name="carnet" formControlName="carnet" placeholder="Carnet de Identidad" class="form-control" [ngClass]="{'is-invalid': !formPaciente.get('carnet').valid && submitted.carnet, 'is-valid': formPaciente.get('carnet').valid && submitted.carnet}">
+                        <div class="valid-feedback">Correcto!</div>
+                    </div>
+    
+    
+                    <div class="form-group has-success">
+                        <!-- <label class="form-control-label" for="usuario">Usuario:</label> -->
+                        <input type="date" name="fechaNacimiento" formControlName="fechaNacimiento" placeholder="fechaNacimiento" class="form-control" [ngClass]="{'is-invalid': !formPaciente.get('fechaNacimiento').valid && submitted.fechaNacimiento, 'is-valid': formPaciente.get('fechaNacimiento').valid && submitted.fechaNacimiento}">
+                        <div class="valid-feedback">Correcto!</div>
+                    </div>
+                    <div class="form-group has-success">
+                        <select name="sexo" formControlName="sexo" class="form-control" placeholder="sexo" [ngClass]="{'is-invalid': !formPaciente.get('sexo').valid && submitted.sexo, 'is-valid': formPaciente.get('sexo').valid && submitted.sexo}">
+                            <option value="0">Masculino</option>
+                            <option value="1">Femenino</option>
+                            <option value="2">Indefinido</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn btn-success mt-4 float-right" type="submit" >
+                            Registrar
+                    </button>
+
+                    <button class="btn btn-warning mt-4 float-left" (click)="atras()">
+                        Regresar
+                    </button>
+                   
+                </form>
+            </div>
+        </div>
+    </div>
+    

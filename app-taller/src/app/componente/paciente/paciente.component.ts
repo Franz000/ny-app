@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PacienteComponent implements OnInit {
 
-  constructor() { }
+  
+  constructor() { 
+  }
 
   ngOnInit() {
+
   }
 
 }
