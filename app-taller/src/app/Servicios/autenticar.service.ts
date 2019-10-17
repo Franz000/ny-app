@@ -6,6 +6,7 @@ import { map, catchError } from "rxjs/operators";
 
 import { Login } from '../models/login';
 import { BehaviorSubject, throwError } from 'rxjs';
+import { CuentasService } from './cuentas.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class AutenticarService {
   API_URI = `http://${window.location.hostname}:3500/api`;
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private cuentasService: CuentasService) {
     this.currentUserSubject = new BehaviorSubject<Login>(JSON.parse(localStorage.getItem('usuarioOn')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -44,6 +45,7 @@ export class AutenticarService {
 
   public get currentUserValue(): Login {
     // console.log(this.currentUserSubject.value)
+    
     return this.currentUserSubject.value;
   }
 

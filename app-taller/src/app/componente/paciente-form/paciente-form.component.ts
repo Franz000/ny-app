@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AutenticarService } from 'src/app/Servicios/autenticar.service';
-import { Location } from '@angular/common';
+import { Location, formatDate } from '@angular/common';
 import { Paciente } from 'src/app/models/Paciente';
 import { PacienteService } from 'src/app/Servicios/paciente.service';
 import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { isObservable } from 'rxjs';
 import { AlertaService } from 'src/app/Servicios/alerta.service';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { CuentasService } from 'src/app/Servicios/cuentas.service';
 
 @Component({
   selector: 'app-paciente-form',
@@ -23,19 +25,35 @@ export class PacienteFormComponent implements OnInit {
     apellidos: false,
     carnet: false,
     nombre: false,
-    sexo: false
+    sexo: false,
+    idMedico: false
   };
 
   editar: boolean;
   returnUrl:string;
 
+  minDate = new Date(1900, 0, 1);
+  maxDate = new Date();
+
+  admin: boolean = false;
+
+
+  myFilter = (d: Date): boolean => {
+    const day = d.getDay();
+    // Prevent Saturday and Sunday from being selected.
+    return day !== 0 && day !== 6;
+  }
+
   paciente: Paciente = {
-    fechaNacimiento: new Date(),
+    fechaNacimiento: null,
     apellidos: '',
     carnet: '',
     nombre: '',
-    sexo: 1
+    sexo: null,
+    idMedico: null,
   };
+
+  cuentas: any = [];
 
   constructor(private router: Router, 
     private _location: Location, 
@@ -43,7 +61,8 @@ export class PacienteFormComponent implements OnInit {
     private autenticarService: AutenticarService, 
     private pacienteService: PacienteService, 
     private alertService: AlertaService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private cuentasService: CuentasService) {
     const params = this.activatedRoute.snapshot.params;
     if (params.id && this.autenticarService.currentUserValue) {
       this.pacienteService.getPaciente((params.id))
@@ -66,18 +85,38 @@ export class PacienteFormComponent implements OnInit {
       }
     }
 
+    if(this.autenticarService.currentUserValue.tipo >= 3){
+      this.admin = true;
+      this.getCuentas();
+    }
+
     this.formPaciente = new FormGroup({
       'nombre': new FormControl('', [Validators.required, Validators.minLength(3)]),
       'apellidos': new FormControl('', [Validators.required, Validators.minLength(3)]),
       'carnet': new FormControl('', [Validators.required, Validators.minLength(4)]),
       'fechaNacimiento': new FormControl('', [Validators.required]),
-      'sexo': new FormControl('', [Validators.required])
+      'sexo': new FormControl('', [Validators.required,Validators.pattern('[0-3]')]),
+      'idMedico': new FormControl('', [Validators.required])
       //correo patron
       //Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')
     });
     this.formPaciente.setValue(this.paciente);
 
 
+  }
+
+
+  getCuentas(){
+    console.log("x");
+
+    this.cuentasService.getCuentas().subscribe(
+      res => {
+        this.cuentas = res;
+        console.log(this.cuentas)
+        this.cuentas.splice(0, 1);
+      },
+      err => console.log(err)
+    );
   }
 
   ngOnInit() {
@@ -119,22 +158,35 @@ export class PacienteFormComponent implements OnInit {
   timerAlert = ()=>{
     this.borrar_alerta = setTimeout(() => {
         this.alertService.clear();
-    }, 20000);
+    }, 10000);
   }
 
+
   registrarPaciente() {
+    let pacienteNuevo: Paciente = this.formPaciente.value
+    if(this.autenticarService.currentUserValue.tipo != 3){
+      pacienteNuevo.idMedico = this.autenticarService.currentUserValue.id;
+    }
     // delete this.paciente.id;
+    console.log("paciente nuevo",pacienteNuevo);
     if (this.formPaciente.invalid){
       console.log("error");
+      pacienteNuevo=null;
     }
-    let pacienteNuevo: Paciente = this.formPaciente.value
+    this.submitted.apellidos=true;
+    this.submitted.carnet=true;
+    this.submitted.fechaNacimiento=true;
+    this.submitted.nombre=true;
+    this.submitted.sexo=true;
+    this.submitted.idMedico=true;
+    
     // pacienteNuevo.sexo = pacienteNuevo.sexo == "Masculino"? 1: (pacienteNuevo.sexo == "Femenino"? 0: 2);
-    pacienteNuevo.idMedico = this.autenticarService.currentUserValue.id;
-    // console.log("paciente nuevo",pacienteNuevo);
+    
+    
     clearTimeout(this.borrar_alerta);
     this.timerAlert();
     
-    this.pacienteService.savePaciente(this.formPaciente.value)
+    this.pacienteService.savePaciente(pacienteNuevo)
       .pipe(first())
       .subscribe(
         data => {

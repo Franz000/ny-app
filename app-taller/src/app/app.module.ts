@@ -18,6 +18,12 @@ import { AlertaComponent } from './componente/alerta/alerta.component';
 import { PacienteComponent } from './componente/paciente/paciente.component';
 import { PacienteListaComponent } from './componente/paciente-lista/paciente-lista.component';
 import { PacienteFormComponent } from './componente/paciente-form/paciente-form.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import {MatNativeDateModule} from '@angular/material/core';
+//import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {DemoMaterialModule} from './material-module';
+
 
 @NgModule({
   declarations: [
@@ -37,12 +43,20 @@ import { PacienteFormComponent } from './componente/paciente-form/paciente-form.
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatNativeDateModule,
+    DemoMaterialModule
   ],
   providers: [
     CuentasService,
     AutenticarService
   ],
+  // entryComponents: [PacienteFormComponent],
   bootstrap: [AppComponent]
 })
+
+
 export class AppModule { }
+
+//platformBrowserDynamic().bootstrapModule(AppModule);

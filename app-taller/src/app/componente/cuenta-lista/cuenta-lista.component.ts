@@ -17,7 +17,7 @@ export class CuentaListaComponent implements OnInit {
 
   currentUser: Login;
   
-  cuentas: any = [];
+  cuentas: Object;
   constructor(private cuentasService: CuentasService, private autenticarService: AutenticarService,private router: Router) {
     if(this.autenticarService.currentUserValue.tipo === 3 && this.autenticarService.currentUserValue){
       this.autenticarService.currentUser.subscribe(x => this.currentUser = x);
@@ -30,10 +30,11 @@ export class CuentaListaComponent implements OnInit {
     this.getCuentas();
   }
 
+
   getCuentas(){
     this.cuentasService.getCuentas().subscribe(
       res => {
-        this.cuentas = res;
+          this.cuentas = res;
       },
       err => console.log(err)
     );

@@ -1,0 +1,28 @@
+// .mat-card{
+//     // border-radius: 10px;
+// }
+
+.form-control{
+    background-color: #ffffff00;
+    border:none
+}
+
+.form-control:active{
+    border:none;
+    box-shadow: none;
+}
+
+.form-control.is-valid:active, .form-control.is-invalid{
+    border:none;
+    box-shadow: none;
+}
+.form-control.is-valid:focus, .form-control.is-invalid{
+    border: none;
+    box-shadow: none;
+}
+.form-control:focus{
+    box-shadow: none;
+    border: none;
+    //color: #fff;
+}
+
