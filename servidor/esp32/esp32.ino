@@ -15,7 +15,7 @@ const char* serverName = "http://192.168.43.56:3500/api/sensor/esp32server/data"
 const String peticion_paciente = "http://192.168.43.56:3500/api/sensor/esp32server/obtener/paciente";
 String token = "vane123";
 
-#define pulsePin 35
+#define pulsePin 4
 
 volatile int BPM;               // int that holds raw Analog in 0. updated every 2mS
 volatile int Signal;            // holds the incoming raw data
